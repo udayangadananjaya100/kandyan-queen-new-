@@ -1,0 +1,18 @@
+Γû▓ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 4.9s
+  Running TypeScript ...
+Failed to compile.
+
+./src/components/Testimonials.tsx:113:135
+Type error: Object literal may only specify known properties, and 'ringOffsetColor' does not exist in type 'Properties<string | number, string & {}>'.
+
+  111 |
+  112 |                             <div className="mt-6 flex flex-col items-center gap-3">
+> 113 |                                 <div className="h-14 w-14 overflow-hidden rounded-full ring-2 ring-primary/25 ring-offset-2" style={{ ringOffsetColor: "var(--t-bg-card)" }}>
+      |                                                                                                                                       ^
+  114 |                                     {/* eslint-disable-next-line @next/next/no-img-element */}
+  115 |                                     <img src={t.image} alt={t.name} className="h-full w-full object-cover" />
+  116 |                                 </div>
+Next.js build worker exited with code: 1 and signal: null

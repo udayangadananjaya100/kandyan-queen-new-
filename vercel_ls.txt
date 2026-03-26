@@ -1,0 +1,9 @@
+Vercel CLI 50.15.1
+Retrieving projectΓÇª
+Fetching deployments in udayangas-projects-e7ba0ddd
+> Deployments for udayangas-projects-e7ba0ddd/kandyan-queen-salon [437ms]
+
+  Age     Deployment                                                                       Status      Environment     Duration     Username                      
+  3m      https://kandyan-queen-salon-6ygbv01m8-udayangas-projects-e7ba0ddd.vercel.app     ΓùÅ Ready     Production      38s          udayangadananjaya100-1068     
+
+https://kandyan-queen-salon-6ygbv01m8-udayangas-projects-e7ba0ddd.vercel.app

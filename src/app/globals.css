@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+/* ===== Theme Variables ===== */
+:root {
+  --t-bg: #0A0A0A;
+  --t-bg-alt: #121212;
+  --t-bg-card: #181818;
+  --t-bg-card-hover: #1F1F1F;
+  --t-bg-input: #1A1A1A;
+  --t-text: #FAFAFA;
+  --t-text-secondary: rgba(255, 255, 255, 0.85);
+  --t-text-muted: rgba(255, 255, 255, 0.65);
+  --t-border: rgba(138, 182, 58, 0.12);
+  --t-border-hover: rgba(138, 182, 58, 0.3);
+  --t-glass: rgba(18, 18, 18, 0.75);
+  --t-glass-border: rgba(255, 255, 255, 0.06);
+  --t-nav: rgba(10, 10, 10, 0.92);
+  --t-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --t-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --t-overlay: rgba(10, 10, 10, 0.8);
+  --t-dot-inactive: rgba(255, 255, 255, 0.15);
+  --t-map-filter: invert(90%) hue-rotate(180deg);
+
+  /* Responsive Brand Colors (Default: Dark Mode) */
+  --p-brand: #7ca145;
+  /* Sage Green for visibility on black */
+  --p-brand-light: #a5c47a;
+  --p-brand-dark: #5a7a30;
+}
+
+[data-theme="light"] {
+  --t-bg: #fdfdfb;
+  --t-bg-alt: #7ca145;
+  /* Sage Green from logo */
+  --t-bg-card: #ffffff;
+  --t-bg-card-hover: #f9fbf4;
+  --t-bg-input: #f4f7ed;
+  --t-text: #1a2e1d;
+  /* Deep Forest Green */
+  --t-text-secondary: #2a3d2c;
+  --t-text-muted: #4a5d4c;
+  --t-border: rgba(124, 161, 69, 0.2);
+  --t-border-hover: rgba(124, 161, 69, 0.4);
+  --t-glass: rgba(255, 255, 255, 0.9);
+  --t-glass-border: rgba(26, 46, 29, 0.08);
+  --t-nav: rgba(253, 253, 251, 0.95);
+  --t-shadow: 0 12px 40px rgba(26, 46, 29, 0.08);
+  --t-shadow-sm: 0 4px 12px rgba(26, 46, 29, 0.04);
+  --t-overlay: rgba(26, 46, 29, 0.6);
+  --t-dot-inactive: rgba(26, 46, 29, 0.2);
+  --t-map-filter: none;
+
+  /* Responsive Brand Colors (Light Mode) */
+  --p-brand: #1a2e1d;
+  /* Deep Forest Green for visibility on white/sage */
+  --p-brand-light: #7ca145;
+  --p-brand-dark: #111d13;
+}
+
+/* ===== Tailwind v4 Theme Tokens ===== */
+@theme inline {
+  --color-primary: var(--p-brand);
+  --color-primary-light: var(--p-brand-light);
+  --color-primary-dark: var(--p-brand-dark);
+  --color-dark: #0a0a0a;
+  --color-cream: #f4f7ed;
+
+  /* Semantic surface tokens — changes with theme */
+  --color-surface: var(--t-bg);
+  --color-surface-alt: var(--t-bg-alt);
+  --color-surface-card: var(--t-bg-card);
+  --color-surface-card-hover: var(--t-bg-card-hover);
+  --color-surface-input: var(--t-bg-input);
+
+  /* Semantic text tokens */
+  --color-on-surface: var(--t-text);
+  --color-on-surface-secondary: var(--t-text-secondary);
+  --color-on-surface-muted: var(--t-text-muted);
+
+  /* Border & glass */
+  --color-themed-border: var(--t-border);
+  --color-themed-border-hover: var(--t-border-hover);
+
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Lato", sans-serif;
+}
+
+@layer base {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-[family-name:var(--font-heading)] font-medium tracking-tight;
+  }
+}
+
+/* ===== Base ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--t-bg);
+  color: var(--t-text);
+  font-family: var(--font-body);
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 3px;
+}
+
+/* ===== Selection ===== */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-dark);
+}
+
+/* ===== Gradient Text ===== */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary), var(--color-primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Shimmer Button ===== */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.btn-shimmer {
+  background: linear-gradient(90deg,
+      var(--color-primary-dark),
+      var(--color-primary-light),
+      var(--color-primary),
+      var(--color-primary-light),
+      var(--color-primary-dark));
+  background-size: 300% 100%;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+/* ===== Glass Effect ===== */
+.glass {
+  background: var(--t-glass);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid var(--t-glass-border);
+  box-shadow: var(--t-shadow-sm);
+}
+
+/* ===== Section Divider ===== */
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary-light));
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* ===== Card ===== */
+.card {
+  background: var(--t-bg-card);
+  border: 1px solid var(--t-border);
+  border-radius: 1.25rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--t-shadow-sm);
+}
+
+.card:hover {
+  border-color: var(--t-border-hover);
+  box-shadow: var(--t-shadow);
+  transform: translateY(-2px);
+  background: var(--t-bg-card-hover);
+}
+
+/* ===== Smooth Theme Transitions ===== */
+.theme-transition,
+.theme-transition * {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, fill 0.4s ease;
+}
+
+/* ===== Form Input ===== */
+.form-input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--t-border);
+  background: var(--t-bg-input);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--t-text);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-input::placeholder {
+  color: var(--t-text-muted);
+}
+
+.form-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(138, 182, 58, 0.15);
+}
+
+.form-input option {
+  background: var(--t-bg-card);
+  color: var(--t-text);
+}
