@@ -6,10 +6,10 @@ import Image from "next/image";
 const offers = [
     { title: "BRIDAL & ENGAGEMENT", sub: "Book your special day with us", free: "Free Luxury Jewelries", img: "/gallery/bridal-hair-v2.png" },
     { title: "FOX 'C' FACIAL TREATMENT", sub: "Experience radiant skin", free: "Free Gel Nail Application", img: "/gallery/facial-v2.png" },
-    { title: "HYDRA FACIAL TREATMENT", sub: "Deep hydration & glow", free: "Free Pedicure Treatment", img: "/gallery/spa-v2.png" },
+    { title: "HYDRA FACIAL TREATMENT", sub: "Deep hydration & glow", free: "Free Pedicure Treatment", img: "/gallery/hydra-facial-v2.png" },
     { title: "GEL NAIL EXTENSIONS", sub: "Flawless long-lasting nails", free: "Free Full Face Threading", img: "/gallery/nail-art-v2.png" },
-    { title: "OXYGENEO FACIAL TREATMENT", sub: "Premium oxygenating facial", free: "Free Hair Cut", img: "/gallery/facial-v2.png" }, // Using facial image
-    { title: "FCR KOREAN FACIAL", sub: "Advanced Korean skincare", free: "Free Pedicure Treatment", img: "/gallery/spa-v2.png" }, // Using spa image
+    { title: "OXYGENEO FACIAL TREATMENT", sub: "Premium oxygenating facial", free: "Free Hair Cut", img: "/gallery/service-specific/promo_oxygeneo_facial_1774591340290.png" }, // Using facial image
+    { title: "FCR KOREAN FACIAL", sub: "Advanced Korean skincare", free: "Free Pedicure Treatment", img: "/gallery/service-specific/promo_fox_c_facial_1774591282323.png" }, // Using spa image
     { title: "KERATIN TREATMENT", sub: "Smooth, frizz-free hair", free: "Free Clean Up Treatment", img: "/gallery/hair-style-v2.png" },
     { title: "HAIR COLOR", sub: "Transform your look", free: "Free Layer Haircut", img: "/gallery/hair-color-v2.png" },
 ];
@@ -32,9 +32,17 @@ export default function PromoBanner() {
             >
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[5px] text-primary">
-                        Special Offers
-                    </span>
+                    <motion.div 
+                        animate={{ 
+                            scale: [1, 1.05, 1],
+                            boxShadow: ["0px 0px 15px rgba(239,68,68,0.2)", "0px 0px 30px rgba(239,68,68,0.6)", "0px 0px 15px rgba(239,68,68,0.2)"]
+                        }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        className="mb-8 inline-flex flex-col sm:flex-row items-center justify-center text-sm md:text-base font-bold uppercase tracking-[4px] text-red-600 bg-red-50 px-6 py-3 rounded-full border-2 border-red-500/30"
+                    >
+                        <span>Special Offers</span>
+                        <span className="font-black sm:ml-3 mt-1 sm:mt-0 text-red-700">- Buy One Get One Free</span>
+                    </motion.div>
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-heading)] font-bold text-on-surface leading-tight">
                         Exclusive Complimentary Services <br />
                         <span className="text-primary font-medium italic mt-2 inline-block">With Any Of The Following!</span>

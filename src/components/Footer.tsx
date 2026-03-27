@@ -160,22 +160,30 @@ export default function Footer() {
                                     Rajawella 20180, Sri Lanka
                                 </p>
                             </div>
-                            <div className="flex items-center gap-4">
-                                <FaPhone className="text-primary" />
-                                <a
-                                    href="tel:+94777433031"
-                                    className="text-sm text-on-surface-secondary transition-colors hover:text-primary"
-                                >
-                                    +94 77 743 3031
-                                </a>
+                            <div className="flex items-start gap-4">
+                                <FaPhone className="mt-0.5 text-primary" />
+                                <div className="flex flex-col gap-1.5">
+                                    <a
+                                        href="tel:+94777433031"
+                                        className="text-sm text-on-surface-secondary transition-colors hover:text-primary"
+                                    >
+                                        +94 77 743 3031
+                                    </a>
+                                    <a
+                                        href="tel:+94812246031"
+                                        className="text-sm text-on-surface-secondary transition-colors hover:text-primary"
+                                    >
+                                        081 224 6031
+                                    </a>
+                                </div>
                             </div>
                             <div className="flex items-center gap-4">
                                 <FaEnvelope className="text-primary" />
                                 <a
-                                    href="mailto:hello@kandyanqueen.lk"
+                                    href="mailto:info@kandyanqueen.com"
                                     className="text-sm text-on-surface-secondary transition-colors hover:text-primary"
                                 >
-                                    hello@kandyanqueen.lk
+                                    info@kandyanqueen.com
                                 </a>
                             </div>
                         </div>

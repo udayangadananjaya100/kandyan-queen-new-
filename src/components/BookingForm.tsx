@@ -83,6 +83,7 @@ _Sent via Kandyan Queen Salon Website_`;
                         <div className="mt-10 space-y-5">
                             {[
                                 { icon: "📞", text: "+94 77 743 3031", href: "tel:+94777433031" },
+                                { icon: "☎️", text: "081 224 6031", href: "tel:+94812246031" },
                                 { icon: "📍", text: "906/1, New Town, Digana, Rajawella 20180" },
                                 { icon: "⏰", text: "Mon - Sat: 9:00 AM — 7:00 PM" },
                             ].map((item) => (
