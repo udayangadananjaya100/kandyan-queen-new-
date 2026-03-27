@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kandyan Queen Salon Website
 
-## Getting Started
+A luxury beauty salon website built with Next.js, Framer Motion, and Tailwind CSS. This site is designed for **Kandyan Queen Salon**, located in Digana, Kandy, Sri Lanka.
+
+## ✨ Features
+
+- **Premium Modern Design**: High-end aesthetic reflecting a luxury salon brand.
+- **Service Showcases**: Detailed sections for Bridal Dressing, Facials, Haircuts, and more.
+- **Dynamic Promotions**: Animated "Buy One Get One Free" offers to drive engagement.
+- **Direct Booking**: Seamless WhatsApp-integrated booking system.
+- **Google Reviews Integration**: Real-time social proof from Google Maps.
+- **Mobile Responsive**: Fully optimized for a seamless experience on all devices.
+- **SEO Optimized**: Local SEO targeting Digana and Kandy areas.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
+- **Deployment**: [Vercel](https://vercel.com/)
+
+## 🚀 Getting Started
 
 First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📞 Contact Information
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Primary Phone**: +94 77 743 3031
+- **Landline**: 081 224 6031
+- **Address**: 906/1, New Town, Digana, Rajawella 20180, Sri Lanka
+- **Email**: info@kandyanqueen.com
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+Designed & Developed by [Lion Code Technologies](https://www.lioncode.lk/)
