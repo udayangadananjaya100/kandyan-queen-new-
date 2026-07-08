@@ -12,12 +12,15 @@ try {
   // First, check if we have Environment Variables (for Vercel Production)
   if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY) {
     if (getApps().length === 0) {
+      let pk = process.env.FIREBASE_PRIVATE_KEY;
+      pk = pk.replace(/^"|"$/g, ''); // Remove surrounding quotes if any
+      pk = pk.replace(/\\n/g, '\n'); // Replace literal \n with actual newlines
+
       initializeApp({
         credential: cert({
           projectId: process.env.FIREBASE_PROJECT_ID,
           clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-          // Replace escaped newlines with actual newlines
-          privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+          privateKey: pk,
         }),
       });
     }
