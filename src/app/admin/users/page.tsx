@@ -62,7 +62,14 @@ export default function UsersPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, role }),
       });
-      const data = await res.json();
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (err) {
+        throw new Error(`Server Error (Not JSON): ${text.substring(0, 100)}...`);
+      }
+      
       if (data.error) {
         setError(data.error);
       } else {
@@ -81,7 +88,15 @@ export default function UsersPage() {
     if (confirm("Are you sure you want to delete this admin user?")) {
       try {
         const res = await fetch(`/api/users?uid=${uid}`, { method: "DELETE" });
-        const data = await res.json();
+        const text = await res.text();
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (err) {
+          alert(`Server Error (Not JSON): ${text.substring(0, 100)}...`);
+          return;
+        }
+        
         if (data.error) {
           alert(data.error);
         } else {
