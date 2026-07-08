@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { adminAuth } from "../../../lib/firebaseAdmin";
+import { adminAuth, adminInitError } from "../../../lib/firebaseAdmin";
 
 export async function GET() {
   if (!adminAuth) {
-    return NextResponse.json({ error: "Admin Auth not initialized" }, { status: 500 });
+    return NextResponse.json({ error: `Admin Auth not initialized: ${adminInitError || 'Missing credentials'}` }, { status: 500 });
   }
   try {
     const listUsersResult = await adminAuth.listUsers();

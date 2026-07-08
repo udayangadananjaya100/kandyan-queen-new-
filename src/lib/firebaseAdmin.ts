@@ -6,6 +6,7 @@ import * as path from 'path';
 
 let adminDb: ReturnType<typeof getFirestore> | null = null;
 let adminAuth: ReturnType<typeof getAuth> | null = null;
+let adminInitError: string | null = null;
 
 try {
   // First, check if we have Environment Variables (for Vercel Production)
@@ -39,8 +40,9 @@ try {
       console.warn('Firebase Admin credentials not found in env vars or local file.');
     }
   }
-} catch (error) {
+} catch (error: any) {
   console.error('Firebase Admin initialization error', error);
+  adminInitError = error.message;
 }
 
-export { adminDb, adminAuth };
+export { adminDb, adminAuth, adminInitError };

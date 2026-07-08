@@ -25,6 +25,10 @@ export default function UsersPage() {
       const data = await res.json();
       if (data.users) {
         setUsers(data.users);
+        setError("");
+      } else if (data.error) {
+        setError(data.error);
+        setUsers([]);
       }
     } catch (error) {
       console.error("Error fetching users", error);
@@ -136,6 +140,12 @@ export default function UsersPage() {
               <tr>
                 <td colSpan={4} className="px-6 py-8 text-center text-on-surface-muted">
                   Loading users...
+                </td>
+              </tr>
+            ) : error ? (
+              <tr>
+                <td colSpan={4} className="px-6 py-8 text-center text-red-500">
+                  {error}
                 </td>
               </tr>
             ) : users.length === 0 ? (
