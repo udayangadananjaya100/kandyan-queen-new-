@@ -100,7 +100,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${playfair.variable} ${lato.variable} antialiased`}>
+      <body className={`${playfair.variable} ${lato.variable} antialiased`} suppressHydrationWarning>
         <ThemeProvider>
           {children}
         </ThemeProvider>

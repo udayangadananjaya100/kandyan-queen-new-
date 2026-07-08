@@ -20,6 +20,7 @@
   --t-overlay: rgba(10, 10, 10, 0.8);
   --t-dot-inactive: rgba(255, 255, 255, 0.15);
   --t-map-filter: invert(90%) hue-rotate(180deg);
+  --t-on-primary: #0a0a0a;
 
   /* Responsive Brand Colors (Default: Dark Mode) */
   --p-brand: #7ca145;
@@ -49,6 +50,7 @@
   --t-overlay: rgba(26, 46, 29, 0.6);
   --t-dot-inactive: rgba(26, 46, 29, 0.2);
   --t-map-filter: none;
+  --t-on-primary: #ffffff;
 
   /* Responsive Brand Colors (Light Mode) */
   --p-brand: #1a2e1d;
@@ -62,6 +64,7 @@
   --color-primary: var(--p-brand);
   --color-primary-light: var(--p-brand-light);
   --color-primary-dark: var(--p-brand-dark);
+  --color-on-primary: var(--t-on-primary);
   --color-dark: #0a0a0a;
   --color-cream: #f4f7ed;
 
@@ -145,6 +148,14 @@ h6 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* ===== Primary Button Text ===== */
+.text-btn-primary {
+  color: #0a0a0a !important; /* Dark text for Gold button in dark mode */
+}
+[data-theme="light"] .text-btn-primary {
+  color: #ffffff !important; /* White text for Green button in light mode */
 }
 
 /* ===== Shimmer Button ===== */

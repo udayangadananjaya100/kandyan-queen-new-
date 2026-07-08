@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { collection, addDoc, serverTimestamp, getDocs, query, orderBy } from "firebase/firestore";
+import { db } from "../lib/firebase";
 
-const serviceOptions = [
+const defaultServiceOptions = [
     "Ladies Haircut", "Hair Coloring", "Keratin Treatment",
     "Party Makeup", "HD Makeup", "Bridal Makeup",
     "Pre-bridal Package", "Full Bridal Package", "Gold Facial",
@@ -20,34 +22,50 @@ const timeSlots = [
 ];
 
 export default function BookingForm() {
+    const [serviceOptions, setServiceOptions] = useState<string[]>(defaultServiceOptions);
     const [formData, setFormData] = useState({
         name: "", phone: "", service: "", date: "", time: "",
     });
     const [submitted, setSubmitted] = useState(false);
 
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const q = query(collection(db, "services"), orderBy("name"));
+                const querySnapshot = await getDocs(q);
+                if (!querySnapshot.empty) {
+                    const fetchedServices: string[] = [];
+                    querySnapshot.forEach((doc) => {
+                        fetchedServices.push(doc.data().name);
+                    });
+                    setServiceOptions(fetchedServices);
+                }
+            } catch (error) {
+                console.error("Error fetching services", error);
+            }
+        };
+        fetchServices();
+    }, []);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setSubmitted(true);
 
-        const salonPhone = "94777433031";
-        const message = `🌟 *New Booking Request* 🌟
-----------------------------
-👤 *Name:* ${formData.name}
-📞 *Phone:* ${formData.phone}
-💇‍♀️ *Service:* ${formData.service}
-📅 *Date:* ${formData.date}
-⏰ *Time:* ${formData.time}
-----------------------------
-_Sent via Kandyan Queen Salon Website_`;
-
-        const whatsappUrl = `https://wa.me/${salonPhone}?text=${encodeURIComponent(message)}`;
-
-        // Open WhatsApp in a new tab
-        window.open(whatsappUrl, "_blank");
+        try {
+            await addDoc(collection(db, "bookings"), {
+                ...formData,
+                status: "pending",
+                createdAt: serverTimestamp()
+            });
+            // Reset form
+            setFormData({ name: "", phone: "", service: "", date: "", time: "" });
+        } catch (error) {
+            console.error("Error adding booking: ", error);
+        }
 
         setTimeout(() => setSubmitted(false), 5000);
     };

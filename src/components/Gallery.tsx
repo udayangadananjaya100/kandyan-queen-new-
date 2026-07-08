@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../lib/firebase";
 
 const galleryImages = [
     { src: "/gallery/bridal-hair-v2.png", alt: "Bridal hair styling", category: "Hair", height: "h-72" },
@@ -19,10 +21,35 @@ const categories = ["All", "Hair", "Makeup", "Skincare", "Nails", "Spa", "Salon"
 
 export default function Gallery() {
     const [activeFilter, setActiveFilter] = useState("All");
+    const [images, setImages] = useState<any[]>(galleryImages);
+
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const snapshot = await getDocs(collection(db, "gallery"));
+                if (!snapshot.empty) {
+                    const data: any[] = [];
+                    snapshot.forEach((doc) => {
+                        const d = doc.data();
+                        data.push({
+                            src: d.url,
+                            alt: d.name,
+                            category: d.category,
+                            height: "h-80" // default height since we don't have dynamic masonry height logic easily stored
+                        });
+                    });
+                    setImages(data);
+                }
+            } catch (error) {
+                console.error("Error fetching gallery images", error);
+            }
+        };
+        fetchImages();
+    }, []);
 
     const filtered = activeFilter === "All"
-        ? galleryImages
-        : galleryImages.filter((img) => img.category === activeFilter);
+        ? images
+        : images.filter((img) => img.category === activeFilter);
 
     return (
         <section id="gallery" className="relative py-16 sm:py-24 lg:py-32 bg-surface-alt">

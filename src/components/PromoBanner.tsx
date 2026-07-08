@@ -1,20 +1,43 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../lib/firebase";
 
-const offers = [
+const defaultOffers = [
     { title: "BRIDAL & ENGAGEMENT", sub: "Book your special day with us", free: "Free Luxury Jewelries", img: "/gallery/bridal-hair-v2.png" },
     { title: "FOX 'C' FACIAL TREATMENT", sub: "Experience radiant skin", free: "Free Gel Nail Application", img: "/gallery/facial-v2.png" },
     { title: "HYDRA FACIAL TREATMENT", sub: "Deep hydration & glow", free: "Free Pedicure Treatment", img: "/gallery/hydra-facial-v2.png" },
     { title: "GEL NAIL EXTENSIONS", sub: "Flawless long-lasting nails", free: "Free Full Face Threading", img: "/gallery/nail-art-v2.png" },
-    { title: "OXYGENEO FACIAL TREATMENT", sub: "Premium oxygenating facial", free: "Free Hair Cut", img: "/gallery/service-specific/promo_oxygeneo_facial_1774591340290.png" }, // Using facial image
-    { title: "FCR KOREAN FACIAL", sub: "Advanced Korean skincare", free: "Free Pedicure Treatment", img: "/gallery/service-specific/promo_fox_c_facial_1774591282323.png" }, // Using spa image
+    { title: "OXYGENEO FACIAL TREATMENT", sub: "Premium oxygenating facial", free: "Free Hair Cut", img: "/gallery/service-specific/promo_oxygeneo_facial_1774591340290.png" },
+    { title: "FCR KOREAN FACIAL", sub: "Advanced Korean skincare", free: "Free Pedicure Treatment", img: "/gallery/service-specific/promo_fox_c_facial_1774591282323.png" },
     { title: "KERATIN TREATMENT", sub: "Smooth, frizz-free hair", free: "Free Clean Up Treatment", img: "/gallery/hair-style-v2.png" },
     { title: "HAIR COLOR", sub: "Transform your look", free: "Free Layer Haircut", img: "/gallery/hair-color-v2.png" },
 ];
 
 export default function PromoBanner() {
+    const [offers, setOffers] = useState<any[]>(defaultOffers);
+
+    useEffect(() => {
+        const fetchOffers = async () => {
+            try {
+                const snapshot = await getDocs(collection(db, "offers"));
+                if (!snapshot.empty) {
+                    const data: any[] = [];
+                    snapshot.forEach((doc) => {
+                        data.push(doc.data());
+                    });
+                    setOffers(data);
+                }
+            } catch (error) {
+                console.error("Error fetching offers", error);
+            }
+        };
+        fetchOffers();
+    }, []);
+
     const phoneNumber = "94777433031";
     const waMessage = encodeURIComponent("Hi Kandyan Queen Salon, I would like to claim an offer from the website! 🎁");
 
@@ -88,7 +111,7 @@ export default function PromoBanner() {
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="btn-shimmer inline-flex items-center gap-2 bg-primary px-10 py-4 rounded-full text-sm font-bold uppercase tracking-widest text-on-primary hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                        className="btn-shimmer inline-flex items-center gap-2 bg-primary px-10 py-4 rounded-full text-sm font-bold uppercase tracking-widest text-btn-primary hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
                     >
                         Claim Offer & Book
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -100,3 +123,5 @@ export default function PromoBanner() {
         </section>
     );
 }
+
+
