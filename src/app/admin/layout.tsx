@@ -28,7 +28,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         router.push("/admin");
       } else if (user) {
         // Fetch custom claims for role
-        const tokenResult = await user.getIdTokenResult(true);
+        const tokenResult = await user.getIdTokenResult();
         const userRole = (tokenResult.claims.role as string) || "super_admin";
         setRole(userRole);
         
