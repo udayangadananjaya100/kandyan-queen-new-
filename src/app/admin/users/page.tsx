@@ -22,7 +22,14 @@ export default function UsersPage() {
     setLoading(true);
     try {
       const res = await fetch("/api/users");
-      const data = await res.json();
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (err) {
+        throw new Error(`Server Error (Not JSON): ${text.substring(0, 100)}...`);
+      }
+      
       if (data.users) {
         setUsers(data.users);
         setError("");
@@ -30,8 +37,10 @@ export default function UsersPage() {
         setError(data.error);
         setUsers([]);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching users", error);
+      setError(error.message || "Failed to load users");
+      setUsers([]);
     } finally {
       setLoading(false);
     }
