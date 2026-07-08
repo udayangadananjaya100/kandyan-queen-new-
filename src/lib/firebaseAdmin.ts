@@ -9,8 +9,21 @@ let adminAuth: ReturnType<typeof getAuth> | null = null;
 let adminInitError: string | null = null;
 
 try {
-  // First, check if we have Environment Variables (for Vercel Production)
-  if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY) {
+  // Check if we have the full service account key as a Base64 string (Most robust for Vercel)
+  if (process.env.FIREBASE_SERVICE_ACCOUNT_BASE64) {
+    if (getApps().length === 0) {
+      const serviceAccount = JSON.parse(
+        Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_BASE64, 'base64').toString('utf8')
+      );
+      initializeApp({
+        credential: cert(serviceAccount),
+      });
+    }
+    adminDb = getFirestore();
+    adminAuth = getAuth();
+  }
+  // Otherwise, check if we have individual Environment Variables (for Vercel Production)
+  else if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY) {
     if (getApps().length === 0) {
       let pk = process.env.FIREBASE_PRIVATE_KEY;
       pk = pk.replace(/^"|"$/g, ''); // Remove surrounding quotes if any
